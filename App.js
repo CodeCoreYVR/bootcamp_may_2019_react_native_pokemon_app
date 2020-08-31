@@ -1,12 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Header from './components/Header';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.h1}>Pokédex</Text>
-      </View>
+      <Header />
       <View style={styles.body}>
         <Text>Hello World</Text>
       </View>
@@ -15,17 +14,6 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    flex: 1,
-    backgroundColor: 'red',
-    paddingTop: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%'
-  },
-  h1: {
-    fontSize: 40
-  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
