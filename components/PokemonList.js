@@ -1,7 +1,8 @@
 import React from 'react'
 import { View, Text, StyleSheet, ScrollView, TouchableHighlight } from 'react-native';
 
-export default function PokemonList({ list }) {
+export default function PokemonList({ list, navigation }) {
+  console.log(navigation)
   return(
     <ScrollView>
       {
@@ -14,6 +15,7 @@ export default function PokemonList({ list }) {
               onPress={(event) => {
                 console.log(event.target)
                 console.log(event.currentTarget)
+                navigation.navigate('Pokemon Details')
               }}
             >
               <View style={styles.li}>

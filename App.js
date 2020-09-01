@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Header from './components/Header';
 import PokemonList from './components/PokemonList';
+import PokemonDetails from './components/PokemonDetails';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -37,9 +38,13 @@ export default function App() {
             >
               <Stack.Screen
                 name="Pokemon List"
-                children={() => {
-                  return <PokemonList list={pokemonList}/>
+                children={({navigation}) => {
+                  return <PokemonList list={pokemonList} navigation={navigation}/>
                 }}
+              />
+              <Stack.Screen
+                name="Pokemon Details"
+                component={PokemonDetails}
               />
             </Stack.Navigator>
           </View>
