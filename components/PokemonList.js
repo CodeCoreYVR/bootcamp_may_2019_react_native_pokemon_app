@@ -15,7 +15,7 @@ export default function PokemonList({ list, navigation }) {
               onPress={(event) => {
                 console.log(event.target)
                 console.log(event.currentTarget)
-                navigation.navigate('Pokemon Details')
+                navigation.navigate('Pokemon Details', { pokemon })
               }}
             >
               <View style={styles.li}>
