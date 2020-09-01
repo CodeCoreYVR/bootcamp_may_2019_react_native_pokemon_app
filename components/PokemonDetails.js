@@ -6,6 +6,7 @@ export default function PokemonDetails(props) {
 
   const [pokemon, setPokemon] = useState({});
   const [currentSprite, setCurrentSprite] = useState(0);
+  const [sprites, setSprites] = useState([]);
 
   useEffect(() => {
     fetch(url)
@@ -15,18 +16,31 @@ export default function PokemonDetails(props) {
       })
   }, [])
 
+  useEffect(() => {
+    if (!pokemon.sprites) {
+      return;
+    }
+    setSprites((state) => {
+      return Object.keys(pokemon.sprites).map(sprite => {
+        if (typeof pokemon.sprites[sprite] === 'string') {
+          return pokemon.sprites[sprite]
+        }
+      }).filter((sprite) => sprite);
+    })
+  }, [pokemon.sprites])
+
   function updateDisplayedSprite(bool) {
     if (bool) {
       setCurrentSprite((state) => {
-        if (state === 7) {
+        if (state === sprites.length - 1) {
           return 0;
         }
         return state + 1;
       })
     } else {
       setCurrentSprite((state) => {
-        if ( state === 0 ) {
-          return Object.keys(pokemon.sprites).length - 3
+        if ( state === 0) {
+          return sprites.length - 1;
         }
         return state - 1;
       })
@@ -41,7 +55,7 @@ export default function PokemonDetails(props) {
             <>
               <View style={styles.imageContainer}>
                 <Button title='👈' onPress={() => updateDisplayedSprite(false) }></Button>
-                <Image style={styles.image} source={{ uri: pokemon.sprites[Object.keys(pokemon.sprites)[currentSprite]] || '#' }}/>
+                <Image style={styles.image} source={{ uri: sprites[currentSprite] || '#' }}/>
                 <Button title='👉' onPress={() => updateDisplayedSprite(true) }></Button>
               </View>
               <Text style={styles.h1}>{pokemon.name}</Text>
